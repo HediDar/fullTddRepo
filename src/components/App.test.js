@@ -15,6 +15,7 @@ describe("App", () => {
 
   describe("when clicking the add gift button", () => {
     // executed before each of the it of this describe
+    const id = 0;
     beforeEach(() => {
       app.find(".btn-add").simulate("click");
     });
@@ -23,12 +24,24 @@ describe("App", () => {
       app.setState({ gifts: [] });
     });
 
-    it("add a giftto state", () => {
-      expect(app.state().gifts).toEqual([{ name: "gift1", id: 0 }]);
+    it("add a gift to state", () => {
+      expect(app.state().gifts).toEqual([{ name: "gift1", id: id }]);
     });
 
     it("add a new gift to the rendered list ", () => {
       expect(app.find(".gift-list").children().length).toEqual(1); // equal 2 because there is test pollution from the click of the previous test
+    });
+    it("creates a gift component", () => {
+      expect(app.find("Gift").exists()).toBe(true);
+    });
+
+    describe("when the users wants to remove a gift", () => {
+      beforeEach(() => {
+        app.instance().removeGift(id);
+      });
+      it("removes the gift from our state", () => {
+        expect(app.state().gifts).toEqual([]);
+      });
     });
   });
 });
