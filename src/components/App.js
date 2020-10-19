@@ -12,7 +12,7 @@ class App extends Component {
 
   addGift = () => {
     let myGifts = [...this.state.gifts];
-    myGifts.push({ name: "gift1", id: myGifts.length });
+    myGifts.push({ id: myGifts.length });
     this.setState({ gifts: myGifts });
   };
 

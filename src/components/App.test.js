@@ -25,7 +25,7 @@ describe("App", () => {
     });
 
     it("add a gift to state", () => {
-      expect(app.state().gifts).toEqual([{ name: "gift1", id: id }]);
+      expect(app.state().gifts).toEqual([{ id: id }]);
     });
 
     it("add a new gift to the rendered list ", () => {
