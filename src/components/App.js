@@ -1,5 +1,6 @@
 import React, { Component } from "react";
-import { Button } from "react-bootstrap";
+import { connect } from "react-redux";
+import * as actions from "../actions/giftsAction";
 import Gift from "./Gift";
 
 class App extends Component {
@@ -11,9 +12,7 @@ class App extends Component {
   }
 
   addGift = () => {
-    let myGifts = [...this.state.gifts];
-    myGifts.push({ id: myGifts.length });
-    this.setState({ gifts: myGifts });
+    this.props.addGift();
   };
 
   removeGift = (id) => {
@@ -22,21 +21,44 @@ class App extends Component {
   };
 
   render() {
-    const toRender = this.state.gifts;
+    console.log(this.props.gifts);
+    const toRender = this.props.gifts;
+    console.log(toRender);
+    if (toRender)
+      return (
+        <div>
+          <h2>testst</h2>
+          <div className="gift-list">
+            {toRender.map((gift) => (
+              <Gift key={gift.id} gift={gift} onDelete={this.removeGift} />
+            ))}
+          </div>
+          <button className="btn" onClick={this.addGift}>
+            add a gift
+          </button>
+        </div>
+      );
     return (
       <div>
         <h2>testst</h2>
-        <div className="gift-list">
-          {toRender.map((gift) => (
-            <Gift key={gift.id} gift={gift} onDelete={this.removeGift} />
-          ))}
-        </div>
-        <Button className="btn-add" onClick={this.addGift}>
+
+        <button className="btn" onClick={this.addGift}>
           add a gift
-        </Button>
+        </button>
       </div>
     );
   }
 }
 
-export default App;
+const mapStateToProps = (state) => {
+  return {
+    gifts: state.gifts,
+  };
+};
+
+const mapDispatchToProps = (dispatch) => ({
+  addGift: () => dispatch(actions.addGift()),
+  deleteTask: (payload) => dispatch(actions.deleteGift(payload)),
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(App);

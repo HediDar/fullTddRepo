@@ -4,10 +4,11 @@ const initialStates = { gifts: [] };
 
 const giftReducer = (state = initialStates, action) => {
   const { type } = action;
+  console.log(state.gifts);
 
   if (type === constants.ADD_GIFT) {
     const myData = state.gifts;
-    myData.push(action.payload);
+    myData.push({ id: state.gifts.length });
 
     return {
       ...state,
@@ -28,6 +29,13 @@ const giftReducer = (state = initialStates, action) => {
     return {
       ...state,
       gifts: myData,
+    };
+  }
+
+  if (type === constants.RESET_GIFTS) {
+    return {
+      ...state,
+      gifts: [],
     };
   }
 };

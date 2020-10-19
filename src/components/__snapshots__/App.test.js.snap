@@ -1,3 +1,15 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`App renders normally 1`] = `ShallowWrapper {}`;
+exports[`App connected to redux store renders normally 1`] = `
+<div>
+  <h2>
+    testst
+  </h2>
+  <button
+    className="btn"
+    onClick={[Function]}
+  >
+    add a gift
+  </button>
+</div>
+`;
