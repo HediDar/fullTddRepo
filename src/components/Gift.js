@@ -1,41 +1,31 @@
 import React, { Component } from "react";
-import {
-  Form,
-  FormGroup,
-  FormControl,
-  Button,
-} from "react-bootstrap";
+import { connect } from "react-redux";
+import * as actions from "../actions/giftsAction";
+import { Form, FormGroup, FormControl, Button } from "react-bootstrap";
 
-class Gift extends Component {
-  constructor() {
-    super();
-    this.state = {
-      person: "",
-      present: "",
-      countries: [],
-    };
-  }
-
+export class Gift extends Component {
   render() {
     return (
       <div>
         <Form>
           <FormGroup>
             <label>Person</label>
-            <FormControl
+            <input
+              type="text"
               className="input-person"
               onChange={(event) =>
-                this.setState({ person: event.target.value })
+                this.props.addPerson(event.target.value, this.props.gift.id)
               }
             />
           </FormGroup>
           <FormGroup>
             <label>Gift</label>
 
-            <FormControl
+            <input
+              type="text"
               className="input-present"
               onChange={(event) =>
-                this.setState({ present: event.target.value })
+                this.props.addPresent(event.target.value, this.props.gift.id)
               }
             />
           </FormGroup>
@@ -55,4 +45,15 @@ class Gift extends Component {
   }
 }
 
-export default Gift;
+const mapStateToProps = (state) => {
+  return {
+    gifts: state.gifts,
+  };
+};
+
+const mapDispatchToProps = (dispatch) => ({
+  addPerson: (person, id) => dispatch(actions.addPerson(person, id)),
+  addPresent: (present, id) => dispatch(actions.addPresent(present, id)),
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(Gift);

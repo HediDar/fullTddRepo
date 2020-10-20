@@ -5,19 +5,14 @@ import { Provider } from "react-redux";
 import renderer from "react-test-renderer";
 import * as actions from "../actions/giftsAction";
 import App from "./App";
-import { Button } from "react-bootstrap";
 
 // const app = shallow(<App />);
 
 const mockStore = configureStore([]);
-const mockedFunction = jest.fn();
 
 describe("App connected to redux store", () => {
   let initialState = { gifts: [] };
   let app;
-  // const mockedFunction = {
-  //   addGift: jest.fn(),
-  // };
 
   let store = mockStore(initialState);
 
@@ -47,19 +42,26 @@ describe("App connected to redux store", () => {
       expect(store.dispatch).toHaveBeenCalledWith(actions.addGift());
     });
 
+    // it("expect call with actions", () => {
+    //   expect(store.dispatch).toHaveBeenCalledWith(actions.deleteGift());
+    // });
+
     // it("add a new gift to the rendered list ", () => {
-    //   expect(app.find(".gift-list").children().length).toEqual(1); // equal 2 because there is test pollution from the click of the previous test
+    //   expect(app2.find(".gift-list").children().length).toEqual(1);
     // });
     // it("creates a gift component", () => {
-    //   expect(app.find("Gift").exists()).toBe(true);
+    //   console.log(app.root.findByType("div"));
+
+    //   expect(app2.find("Gift").exists()).toBe(true);
     // });
 
     // describe("when the users wants to remove a gift", () => {
     //   beforeEach(() => {
-    //     app.instance().removeGift(id);
+    //     app2 = shallow(<App store={store} />);
+    //     app2.find(".btn-remove").simulate("click");
     //   });
     //   it("removes the gift from our state", () => {
-    //     expect(app.state().gifts).toEqual([]);
+    //     expect(store.dispatch).toHaveBeenCalledWith(actions.deleteGift());
     //   });
     // });
   });

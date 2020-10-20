@@ -7,6 +7,7 @@ exports[`App connected to redux store renders normally 1`] = `
   </h2>
   <div
     className="gift-list"
+    id="myDiv"
   />
   <button
     className="btn"

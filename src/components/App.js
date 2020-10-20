@@ -3,32 +3,23 @@ import { connect } from "react-redux";
 import * as actions from "../actions/giftsAction";
 import Gift from "./Gift";
 
-class App extends Component {
-  constructor() {
-    super();
-    this.state = {
-      gifts: [],
-    };
-  }
-
+export class App extends Component {
   addGift = () => {
     this.props.addGift();
   };
 
   removeGift = (id) => {
-    const gifts = this.state.gifts.filter((gift) => gift.id !== id);
-    this.setState({ gifts });
+    this.props.removeGift(id);
   };
 
   render() {
-    // console.log(this.props.gifts);
     const toRender = this.props.gifts;
-    // console.log(toRender);
+
     if (toRender)
       return (
         <div>
           <h2>testst</h2>
-          <div className="gift-list">
+          <div className="gift-list" id="myDiv">
             {toRender.map((gift) => (
               <Gift key={gift.id} gift={gift} onDelete={this.removeGift} />
             ))}
@@ -42,7 +33,7 @@ class App extends Component {
       <div>
         <h2>testst</h2>
 
-        <button className="btn" onClick={this.addGift}>
+        <button className="btn-remove" onClick={this.addGift}>
           add a gift
         </button>
       </div>
@@ -58,7 +49,7 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => ({
   addGift: () => dispatch(actions.addGift()),
-  deleteTask: (payload) => dispatch(actions.deleteGift(payload)),
+  removeGift: (payload) => dispatch(actions.deleteGift(payload)),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(App);

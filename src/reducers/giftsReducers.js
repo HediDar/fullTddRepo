@@ -5,8 +5,9 @@ const initialStates = { gifts: [] };
 const giftReducer = (state = initialStates, action) => {
   const { type } = action;
 
+
   if (type === constants.ADD_GIFT) {
-    const myData = state.gifts;
+    const myData = [...state.gifts];
     myData.push({ id: state.gifts.length, person: "", present: "" });
 
     return {
@@ -16,14 +17,8 @@ const giftReducer = (state = initialStates, action) => {
   }
 
   if (type === constants.DELETE_GIFT) {
-    const myData = [...state.gifts];
-    let i = -1;
-    for (const elem of myData) {
-      i++;
-      if (elem.id === action.payload) {
-        myData.splice(i, 1);
-      }
-    }
+    let myData = [...state.gifts];
+    myData = myData.filter((el) => el.id !== action.payload);
 
     return {
       ...state,
