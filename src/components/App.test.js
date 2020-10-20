@@ -42,10 +42,9 @@ describe("App connected to redux store", () => {
     beforeEach(() => {
       app.root.findByType("button").props.onClick();
     });
-   
+
     it("expect call with actions", () => {
       expect(store.dispatch).toHaveBeenCalledWith(actions.addGift());
-  
     });
 
     // it("add a new gift to the rendered list ", () => {

@@ -18,3 +18,19 @@ export const resetGift = () => {
     type: constants.RESET_GIFTS,
   };
 };
+
+export const addPerson = (person, id) => {
+  return {
+    type: constants.ADD_PERSON,
+    payload: person,
+    meta: id,
+  };
+};
+
+export const addPresent = (present, id) => {
+  return {
+    type: constants.ADD_PRESENT,
+    payload: present,
+    meta: id,
+  };
+};

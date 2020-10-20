@@ -22,3 +22,28 @@ it("creates an action to reset a gift", () => {
 
   expect(actions.resetGift(id)).toEqual(expectedAction);
 });
+
+it("creates an action to set the gift's person", () => {
+  const person = "hedi";
+  const id = 0;
+  const expectedAction = {
+    type: constants.ADD_PERSON,
+    payload: person,
+    meta: id,
+  };
+
+  expect(actions.addPerson(person, id)).toEqual(expectedAction);
+});
+
+it("creates an action to set the gift's present", () => {
+  const present = "chocolat";
+  const id = 0;
+
+  const expectedAction = {
+    type: constants.ADD_PRESENT,
+    payload: present,
+    meta: id,
+  };
+
+  expect(actions.addPresent(present, id)).toEqual(expectedAction);
+});

@@ -5,6 +5,9 @@ exports[`App connected to redux store renders normally 1`] = `
   <h2>
     testst
   </h2>
+  <div
+    className="gift-list"
+  />
   <button
     className="btn"
     onClick={[Function]}

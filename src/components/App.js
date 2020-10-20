@@ -21,9 +21,9 @@ class App extends Component {
   };
 
   render() {
-    console.log(this.props.gifts);
+    // console.log(this.props.gifts);
     const toRender = this.props.gifts;
-    console.log(toRender);
+    // console.log(toRender);
     if (toRender)
       return (
         <div>
