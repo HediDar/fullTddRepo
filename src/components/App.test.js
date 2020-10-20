@@ -1,12 +1,9 @@
 import React from "react";
-import { shallow } from "enzyme";
 import configureStore from "redux-mock-store";
 import { Provider } from "react-redux";
 import renderer from "react-test-renderer";
 import * as actions from "../actions/giftsAction";
 import App from "./App";
-
-// const app = shallow(<App />);
 
 const mockStore = configureStore([]);
 
@@ -33,7 +30,6 @@ describe("App connected to redux store", () => {
 
   describe("when clicking the add gift button", () => {
     // executed before each of the it of this describe
-    const id = 0;
     beforeEach(() => {
       app.root.findByType("button").props.onClick();
     });
@@ -41,28 +37,5 @@ describe("App connected to redux store", () => {
     it("expect call with actions", () => {
       expect(store.dispatch).toHaveBeenCalledWith(actions.addGift());
     });
-
-    // it("expect call with actions", () => {
-    //   expect(store.dispatch).toHaveBeenCalledWith(actions.deleteGift());
-    // });
-
-    // it("add a new gift to the rendered list ", () => {
-    //   expect(app2.find(".gift-list").children().length).toEqual(1);
-    // });
-    // it("creates a gift component", () => {
-    //   console.log(app.root.findByType("div"));
-
-    //   expect(app2.find("Gift").exists()).toBe(true);
-    // });
-
-    // describe("when the users wants to remove a gift", () => {
-    //   beforeEach(() => {
-    //     app2 = shallow(<App store={store} />);
-    //     app2.find(".btn-remove").simulate("click");
-    //   });
-    //   it("removes the gift from our state", () => {
-    //     expect(store.dispatch).toHaveBeenCalledWith(actions.deleteGift());
-    //   });
-    // });
   });
 });
