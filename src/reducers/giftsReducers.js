@@ -1,15 +1,26 @@
 import * as constants from "../actions/constants";
 
-const initialStates = { gifts: [] };
+const initialStates = { gifts: [], countries: [] };
 
 const giftReducer = (state = initialStates, action) => {
   const { type } = action;
 
 
+  if (type === constants.GET_COUNTRIES_PENDING) {
+    console.log("pending");
+  }
+
+  if (type === constants.GET_COUNTRIES_FULFILLED) {
+    return { ...state, countries: action.payload.data };
+  }
+
+  if (type === constants.GET_COUNTRIES_REJECTED) {
+    console.log("rejected");
+  }
+
   if (type === constants.ADD_GIFT) {
     const myData = [...state.gifts];
     myData.push({ id: state.gifts.length, person: "", present: "" });
-
     return {
       ...state,
       gifts: myData,

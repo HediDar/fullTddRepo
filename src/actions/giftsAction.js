@@ -1,4 +1,5 @@
 import * as constants from "./constants";
+import { getAllCountriesByApi } from "../domain/APICalls";
 
 export const addGift = () => {
   return {
@@ -32,5 +33,12 @@ export const addPresent = (present, id) => {
     type: constants.ADD_PRESENT,
     payload: present,
     meta: id,
+  };
+};
+
+export const getAllCountriesAction = () => {
+  return {
+    type: constants.GET_COUNTRIES,
+    payload: getAllCountriesByApi(),
   };
 };

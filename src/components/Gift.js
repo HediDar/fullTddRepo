@@ -4,7 +4,32 @@ import * as actions from "../actions/giftsAction";
 import { Form, FormGroup, FormControl, Button } from "react-bootstrap";
 
 export class Gift extends Component {
+  componentDidMount() {
+    this.props.getAllCountriesAction();
+  }
+
   render() {
+    const arrTen = [];
+
+    if (this.props.countries) {
+      for (var k = 0; k < this.props.countries.length; k++) {
+        arrTen.push(
+          <option
+            key={this.props.countries[k].name}
+            value={this.props.countries[k].name}
+          >
+            {" "}
+            {this.props.countries[k].name}{" "}
+          </option>
+        );
+      }
+    } else {
+      arrTen.push(
+        <option key="empty" value="loading">
+          {" loading"}
+        </option>
+      );
+    }
     return (
       <div>
         <Form>
@@ -31,6 +56,11 @@ export class Gift extends Component {
           </FormGroup>
 
           <FormGroup>
+            <label>Countries</label>
+            <select className="mySelect">{arrTen}</select>
+          </FormGroup>
+
+          <FormGroup>
             <label>Gift</label>
             <Button
               className="btn-delete"
@@ -48,12 +78,14 @@ export class Gift extends Component {
 const mapStateToProps = (state) => {
   return {
     gifts: state.gifts,
+    countries: state.countries,
   };
 };
 
 const mapDispatchToProps = (dispatch) => ({
   addPerson: (person, id) => dispatch(actions.addPerson(person, id)),
   addPresent: (present, id) => dispatch(actions.addPresent(present, id)),
+  getAllCountriesAction: () => dispatch(actions.getAllCountriesAction()),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Gift);

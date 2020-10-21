@@ -1,5 +1,6 @@
 import * as constants from "./constants";
 import * as actions from "./giftsAction";
+import { getAllCountriesByApi } from "../domain/APICalls";
 
 it("creates an action to add a gift", () => {
   const expectedAction = { type: constants.ADD_GIFT };
@@ -46,4 +47,13 @@ it("creates an action to set the gift's present", () => {
   };
 
   expect(actions.addPresent(present, id)).toEqual(expectedAction);
+});
+
+it("creates an action to get all countries by api", () => {
+  const expectedAction = {
+    type: constants.GET_COUNTRIES,
+    payload: getAllCountriesByApi(),
+  };
+
+  expect(actions.getAllCountriesAction()).toEqual(expectedAction);
 });
