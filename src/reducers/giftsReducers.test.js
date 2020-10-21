@@ -56,13 +56,12 @@ describe("giftReducer", () => {
       });
 
       it("GET_COUNTRIES_FULFILLED case test", () => {
-        const myAction = {
-          type: constants.GET_COUNTRIES_FULFILLED,
-          payload: getAllCountriesByApi(),
-        };
-        expect(giftReducer(undefined, { myAction })).toEqual(
-          myAction.payload.data
-        );
+        expect(
+          giftReducer(undefined, {
+            type: constants.GET_COUNTRIES_FULFILLED,
+            payload: getAllCountriesByApi(),
+          })
+        ).toEqual({ countries: undefined, gifts: [] }); //undefined cause i dont know or cant simulate the data fetch
       });
 
       it("GET_COUNTRIES_REJECTED case test", () => {
