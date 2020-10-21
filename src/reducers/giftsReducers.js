@@ -5,9 +5,9 @@ const initialStates = { gifts: [], countries: [] };
 const giftReducer = (state = initialStates, action) => {
   const { type } = action;
 
-
   if (type === constants.GET_COUNTRIES_PENDING) {
     console.log("pending");
+    return { ...state };
   }
 
   if (type === constants.GET_COUNTRIES_FULFILLED) {
@@ -16,6 +16,7 @@ const giftReducer = (state = initialStates, action) => {
 
   if (type === constants.GET_COUNTRIES_REJECTED) {
     console.log("rejected");
+    return { ...state };
   }
 
   if (type === constants.ADD_GIFT) {

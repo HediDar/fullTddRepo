@@ -2,6 +2,8 @@ import giftReducer from "./giftsReducers";
 import * as constants from "../actions/constants";
 import { getAllCountriesByApi } from "../domain/APICalls";
 
+jest.spyOn(console, "log");
+
 describe("giftReducer", () => {
   describe("modifications done by the app component", () => {
     it("add a gift", () => {
@@ -34,14 +36,23 @@ describe("giftReducer", () => {
 
   describe("modifications done by the gift component", () => {
     describe("test my api get all countries with redux-promise", () => {
+      afterEach(() => {
+        jest.clearAllMocks();
+      });
+
+      const initialStates = { gifts: [], countries: [] };
       it("GET_COUNTRIES_PENDING case test", () => {
         const pendingMessage = "pending";
+        expect(console.log.mock.calls.length).toBe(0);
+
         expect(
           giftReducer(undefined, {
             type: constants.GET_COUNTRIES_PENDING,
             payload: getAllCountriesByApi(),
           })
-        ).toEqual(pendingMessage);
+        ).toEqual(initialStates);
+        expect(console.log.mock.calls.length).toBe(1);
+        expect(console.log.mock.calls[0][0]).toBe(pendingMessage);
       });
 
       it("GET_COUNTRIES_FULFILLED case test", () => {
@@ -55,13 +66,16 @@ describe("giftReducer", () => {
       });
 
       it("GET_COUNTRIES_REJECTED case test", () => {
-        const rejectedMessage = "rejected";
+        const rejectMessage = "rejected";
+        expect(console.log.mock.calls.length).toBe(0);
         expect(
           giftReducer(undefined, {
             type: constants.GET_COUNTRIES_REJECTED,
             payload: getAllCountriesByApi(),
           })
-        ).toEqual(rejectedMessage);
+        ).toEqual(initialStates);
+        expect(console.log.mock.calls.length).toBe(1);
+        expect(console.log.mock.calls[0][0]).toBe(rejectMessage);
       });
     });
 
