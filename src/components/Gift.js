@@ -9,8 +9,16 @@ export class Gift extends Component {
     this.props.getAllCountriesAction();
   }
 
+  handleChange = (e) => {
+    this.props.setCountrieSelectedAction(e.target.value);
+  };
+
+  // handleChange(e) {
+  //   this.props.setCountrieSelectedAction(e.target.value);
+  // }
+
   render() {
-    const arrTen1 = this.props.getArrayCountries;// im using the selector just to test them, i dont really need them in my app
+    const arrTen1 = this.props.getArrayCountries; // im using the selector just to test them, i dont really need them in my app
     const arrTen = [];
     if (this.props.countries) {
       for (var k = 0; k < this.props.countries.length; k++) {
@@ -58,7 +66,13 @@ export class Gift extends Component {
 
           <FormGroup>
             <label>Countries</label>
-            <select className="mySelect">{arrTen}</select>
+            <select
+              className="mySelect"
+              onChange={this.handleChange}
+              onFocus={this.handleChange}
+            >
+              {arrTen}
+            </select>
           </FormGroup>
 
           <FormGroup>
@@ -88,6 +102,8 @@ const mapDispatchToProps = (dispatch) => ({
   addPerson: (person, id) => dispatch(actions.addPerson(person, id)),
   addPresent: (present, id) => dispatch(actions.addPresent(present, id)),
   getAllCountriesAction: () => dispatch(actions.getAllCountriesAction()),
+  setCountrieSelectedAction: (countrie) =>
+    dispatch(actions.setCountrieSelectedAction(countrie)),
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Gift);

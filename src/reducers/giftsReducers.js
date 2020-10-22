@@ -1,6 +1,6 @@
 import * as constants from "../actions/constants";
 
-const initialStates = { gifts: [], countries: [] };
+const initialStates = { gifts: [], countries: [], countrieSelected: "" };
 
 const giftReducer = (state = initialStates, action) => {
   const { type } = action;
@@ -11,7 +11,13 @@ const giftReducer = (state = initialStates, action) => {
   }
 
   if (type === constants.GET_COUNTRIES_FULFILLED) {
-    return { ...state, countries: action.payload.data };
+    if(action.payload.data)
+    return {
+      ...state,
+      countries: action.payload.data,
+      countrieSelected: action.payload.data[0].name,
+    };
+    return {...state};
   }
 
   if (type === constants.GET_COUNTRIES_REJECTED) {
@@ -42,6 +48,13 @@ const giftReducer = (state = initialStates, action) => {
     return {
       ...state,
       gifts: [],
+    };
+  }
+
+  if (type === constants.SET_COUNTRIE) {
+    return {
+      ...state,
+      countrieSelected: action.payload,
     };
   }
 

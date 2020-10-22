@@ -42,3 +42,10 @@ export const getAllCountriesAction = () => {
     payload: getAllCountriesByApi(),
   };
 };
+
+export const setCountrieSelectedAction = (countrie) => {
+  return {
+    type: constants.SET_COUNTRIE,
+    payload: countrie,
+  };
+};

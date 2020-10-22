@@ -57,3 +57,13 @@ it("creates an action to get all countries by api", () => {
 
   expect(actions.getAllCountriesAction()).toEqual(expectedAction);
 });
+
+it("creates an action to change state of selected countrie", () => {
+  const countrie = "test";
+  const expectedAction = {
+    type: constants.SET_COUNTRIE,
+    payload: countrie,
+  };
+
+  expect(actions.setCountrieSelectedAction(countrie)).toEqual(expectedAction);
+});

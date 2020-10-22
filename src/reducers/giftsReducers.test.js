@@ -40,7 +40,7 @@ describe("giftReducer", () => {
         jest.clearAllMocks();
       });
 
-      const initialStates = { gifts: [], countries: [] };
+      const initialStates = { gifts: [], countries: [], countrieSelected: "" };
       it("GET_COUNTRIES_PENDING case test", () => {
         const pendingMessage = "pending";
         expect(console.log.mock.calls.length).toBe(0);
@@ -61,7 +61,7 @@ describe("giftReducer", () => {
             type: constants.GET_COUNTRIES_FULFILLED,
             payload: getAllCountriesByApi(),
           })
-        ).toEqual({ countries: undefined, gifts: [] }); //undefined cause i dont know or cant simulate the data fetch
+        ).toEqual({ countries: [], gifts: [], countrieSelected: "" }); //undefined cause i dont know or cant simulate the data fetch
       });
 
       it("GET_COUNTRIES_REJECTED case test", () => {
@@ -110,6 +110,25 @@ describe("giftReducer", () => {
           )
         ).toEqual({
           gifts: [{ id: 0, person: "", present: present }],
+        });
+      });
+
+      it("update a countrie", () => {
+        const countrie = "testCountrie";
+        expect(
+          giftReducer(
+            {
+              gifts: [{ id: 0, person: "", present: "" }],
+              countrieSelected: "",
+            },
+            {
+              type: constants.SET_COUNTRIE,
+              payload: countrie,
+            }
+          )
+        ).toEqual({
+          gifts: [{ id: 0, person: "", present: "" }],
+          countrieSelected: "testCountrie",
         });
       });
     });
