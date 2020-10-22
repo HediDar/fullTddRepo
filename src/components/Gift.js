@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import { connect } from "react-redux";
 import * as actions from "../actions/giftsAction";
 import { Form, FormGroup, FormControl, Button } from "react-bootstrap";
+import { getCountriesArrayToDisplay } from "../selectors/selectCountries";
 
 export class Gift extends Component {
   componentDidMount() {
@@ -9,8 +10,8 @@ export class Gift extends Component {
   }
 
   render() {
+    const arrTen1 = this.props.getArrayCountries;// im using the selector just to test them, i dont really need them in my app
     const arrTen = [];
-
     if (this.props.countries) {
       for (var k = 0; k < this.props.countries.length; k++) {
         arrTen.push(
@@ -79,6 +80,7 @@ const mapStateToProps = (state) => {
   return {
     gifts: state.gifts,
     countries: state.countries,
+    getArrayCountries: getCountriesArrayToDisplay(state),
   };
 };
 
