@@ -1,13 +1,14 @@
 import giftReducer from "./giftsReducers";
-import * as constants from "../actions/constants";
-import { getAllCountriesByApi } from "../domain/APICalls";
 
 jest.spyOn(console, "log");
+const getAllCountriesByApi = new Promise((resolve, reject) => {
+  // do you business normal here as normaly
+});
 
 describe("giftReducer", () => {
   describe("modifications done by the app component", () => {
     it("add a gift", () => {
-      expect(giftReducer({ gifts: [] }, { type: constants.ADD_GIFT })).toEqual({
+      expect(giftReducer({ gifts: [] }, { type: "ADD_GIFT" })).toEqual({
         gifts: [{ id: 0, person: "", present: "" }],
       }); // the reducer takes two args:initial state+the action that contains the type+payload
     });
@@ -17,7 +18,7 @@ describe("giftReducer", () => {
       expect(
         giftReducer(
           { gifts: [{ id: 0, person: "", present: "" }] },
-          { type: constants.DELETE_GIFT, payload: id }
+          { type: "DELETE_GIFT", payload: id }
         )
       ).toEqual({ gifts: [] }); // the reducer takes two args:initial state+the action that contains the type+payload
     });
@@ -26,7 +27,7 @@ describe("giftReducer", () => {
       expect(
         giftReducer(
           { gifts: [{ id: 0, person: "", present: "" }] },
-          { type: constants.RESET_GIFTS }
+          { type: "RESET_GIFTS" }
         )
       ).toEqual({
         gifts: [],
@@ -47,8 +48,8 @@ describe("giftReducer", () => {
 
         expect(
           giftReducer(undefined, {
-            type: constants.GET_COUNTRIES_PENDING,
-            payload: getAllCountriesByApi(),
+            type: "GET_COUNTRIES_PENDING",
+            payload: getAllCountriesByApi,
           })
         ).toEqual(initialStates);
         expect(console.log.mock.calls.length).toBe(1);
@@ -58,8 +59,8 @@ describe("giftReducer", () => {
       it("GET_COUNTRIES_FULFILLED case test", () => {
         expect(
           giftReducer(undefined, {
-            type: constants.GET_COUNTRIES_FULFILLED,
-            payload: getAllCountriesByApi(),
+            type: "GET_COUNTRIES_FULFILLED",
+            payload: getAllCountriesByApi,
           })
         ).toEqual({ countries: [], gifts: [], countrieSelected: "" }); //undefined cause i dont know or cant simulate the data fetch
       });
@@ -69,8 +70,8 @@ describe("giftReducer", () => {
         expect(console.log.mock.calls.length).toBe(0);
         expect(
           giftReducer(undefined, {
-            type: constants.GET_COUNTRIES_REJECTED,
-            payload: getAllCountriesByApi(),
+            type: "GET_COUNTRIES_REJECTED",
+            payload: getAllCountriesByApi,
           })
         ).toEqual(initialStates);
         expect(console.log.mock.calls.length).toBe(1);
@@ -86,7 +87,7 @@ describe("giftReducer", () => {
           giftReducer(
             { gifts: [{ id: 0, person: "", present: "" }] },
             {
-              type: constants.ADD_PERSON,
+              type: "ADD_PERSON",
               payload: person,
               meta: id,
             }
@@ -103,7 +104,7 @@ describe("giftReducer", () => {
           giftReducer(
             { gifts: [{ id: 0, person: "", present: "" }] },
             {
-              type: constants.ADD_PRESENT,
+              type: "ADD_PRESENT",
               payload: present,
               meta: id,
             }
@@ -122,7 +123,7 @@ describe("giftReducer", () => {
               countrieSelected: "",
             },
             {
-              type: constants.SET_COUNTRIE,
+              type: "SET_COUNTRIE",
               payload: countrie,
             }
           )

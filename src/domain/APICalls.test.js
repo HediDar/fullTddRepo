@@ -1,9 +1,10 @@
 import axios from "axios";
+import myApiService from "../domain/APICalls";
 
-import { getAllCountriesByApi } from "./APICalls";
 
 jest.mock("axios");
 const apiUrl = "https://restcountries.eu/rest/v2/all";
+const { getAllCountriesByApi } = myApiService({ axios });
 
 describe("get all countries", () => {
   it("fetches successfully all countries data from an API", async () => {

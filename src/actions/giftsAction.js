@@ -1,5 +1,8 @@
 import * as constants from "./constants";
-import { getAllCountriesByApi } from "../domain/APICalls";
+import myApiService from "../domain/APICalls";
+import axios from "axios";
+
+const { getAllCountriesByApi } = myApiService({ axios });
 
 export const addGift = () => {
   return {
