@@ -4,7 +4,7 @@ import * as actions from "../actions/giftsAction";
 import Gift from "./Gift";
 
 export class App extends Component {
-  addGift = () => {
+  addingGift = () => {
     this.props.addGift();
   };
 
@@ -19,12 +19,17 @@ export class App extends Component {
       return (
         <div>
           <h2>testst</h2>
-          <div className="gift-list" id="myDiv">
+          <div className="gift-list" data-testid="giftDiv" id="myDiv">
             {toRender.map((gift) => (
-              <Gift key={gift.id} gift={gift} onDelete={this.removeGift} />
+              <Gift
+                key={gift.id}
+                gift={gift}
+                data-testid={gift.id + ""}
+                onDelete={this.removeGift}
+              />
             ))}
           </div>
-          <button className="btn" onClick={this.addGift}>
+          <button className="myBTN" id="btnAdd" onClick={this.addingGift}>
             add a gift
           </button>
         </div>
@@ -33,7 +38,7 @@ export class App extends Component {
       <div>
         <h2>testst</h2>
 
-        <button className="btn-remove" onClick={this.addGift}>
+        <button className="myBTN" onClick={this.addingGift}>
           add a gift
         </button>
       </div>
